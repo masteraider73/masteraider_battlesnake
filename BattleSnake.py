@@ -10,6 +10,20 @@ For instructions see https://github.com/BattlesnakeOfficial/starter-snake-python
 
 
 class Battlesnake(object):
+    bSize = 11
+    health = 100
+    board = [[0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0,0]]
+    
     @cherrypy.expose
     @cherrypy.tools.json_out()
     def index(self):
@@ -37,7 +51,7 @@ class Battlesnake(object):
     def move(self):
         # Update
         data = cherrypy.request.json
-        print(data)
+        deciferLogs(data)
         # Choose a random direction to move in
         possible_moves = ["up", "down", "left", "right"]
         move = random.choice(possible_moves)
@@ -63,3 +77,7 @@ if __name__ == "__main__":
     )
     print("Starting Battlesnake Server...")
     cherrypy.quickstart(server)
+
+def deciferLogs(data):
+    list = data.split("},")
+    print(list)
