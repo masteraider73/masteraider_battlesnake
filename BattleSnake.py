@@ -13,22 +13,19 @@ class Battlesnake(object):
     @cherrypy.expose
     @cherrypy.tools.json_out()
     def index(self):
-        # This function is called when you register your Battlesnake on play.battlesnake.com
-        # It controls your Battlesnake appearance and author permissions.
-        # TIP: If you open your Battlesnake URL in browser you should see this data
+        # appearance
         return {
             "apiversion": "1",
-            "author": "",  # TODO: Your Battlesnake Username
-            "color": "#888888",  # TODO: Personalize
-            "head": "default",  # TODO: Personalize
-            "tail": "default",  # TODO: Personalize
+            "author": "Masteraider73",  
+            "color": "#0d101e",  
+            "head": "fang",  
+            "tail": "bolt",
         }
 
     @cherrypy.expose
     @cherrypy.tools.json_in()
     def start(self):
-        # This function is called everytime your snake is entered into a game.
-        # cherrypy.request.json contains information about the game that's about to be played.
+        # Start
         data = cherrypy.request.json
 
         print("START")
@@ -38,11 +35,9 @@ class Battlesnake(object):
     @cherrypy.tools.json_in()
     @cherrypy.tools.json_out()
     def move(self):
-        # This function is called on every turn of a game. It's how your snake decides where to move.
-        # Valid moves are "up", "down", "left", or "right".
-        # TODO: Use the information in cherrypy.request.json to decide your next move.
+        # Update
         data = cherrypy.request.json
-
+        print(data)
         # Choose a random direction to move in
         possible_moves = ["up", "down", "left", "right"]
         move = random.choice(possible_moves)
@@ -53,8 +48,7 @@ class Battlesnake(object):
     @cherrypy.expose
     @cherrypy.tools.json_in()
     def end(self):
-        # This function is called when a game your snake was in ends.
-        # It's purely for informational purposes, you don't have to make any decisions here.
+        # End
         data = cherrypy.request.json
 
         print("END")
